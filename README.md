@@ -1,4 +1,4 @@
-# expenses
+# Expenses
 
 A expense management app for training skills in flutter development
 
