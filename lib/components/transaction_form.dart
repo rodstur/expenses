@@ -17,6 +17,13 @@ class _TransactionFormState extends State<TransactionForm> {
   final dateController =
       TextEditingController(text: DateFormat("dd/MM/y").format(DateTime.now()));
 
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
+
   void _submitForm() {
     final title = titleController.text;
     final value = double.tryParse(valueController.text) ?? 0;

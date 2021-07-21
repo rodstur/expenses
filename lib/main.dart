@@ -1,59 +1,26 @@
-import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:expenses/components/chart.dart';
-import 'package:expenses/models/transaction_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'components/chart.dart';
 import 'components/transaction_form.dart';
 import 'components/transaction_list.dart';
-
 import 'models/transaction.dart';
+import 'models/transaction_repository.dart';
+import 'styles/custom_theme_data.dart';
 
 void main(List<String> args) => runApp(ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeData = CustomThemeData().themeData;
+
     return MaterialApp(
       home: MyHomePage(),
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        accentColor: Colors.amber,
-        fontFamily: "Quicksand",
-        textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: const TextStyle(
-                fontFamily: "OpenSans",
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-              button: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            primary: Colors.white,
-            backgroundColor: Colors.teal,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-          ),
-        ),
-        appBarTheme: AppBarTheme(
-          textTheme: ThemeData.light().textTheme.copyWith(
-                headline6: const TextStyle(
-                  fontFamily: "OpenSans",
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-        ),
-      ),
+      theme: themeData,
     );
   }
 }
@@ -64,8 +31,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = TransactionRepository().generate;
+  final List<Transaction> _transactions;
   bool _showChart = false;
+
+  _MyHomePageState() : _transactions = TransactionRepository().generate;
 
   List<Transaction> get _recentTransactions {
     return _transactions
@@ -103,15 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
           topRight: Radius.circular(10),
         ),
       ),
-      builder: (_) {
-        return TransactionForm(_addTransaction);
-      },
+      builder: (_) => TransactionForm(_addTransaction),
     );
   }
 
-  void onchangeChart() => setState(() {
-        _showChart = !_showChart;
-      });
+  void onchangeChart() => setState(() => _showChart = !_showChart);
 
   @override
   Widget build(BuildContext context) {

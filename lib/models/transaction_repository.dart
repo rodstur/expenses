@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:expenses/models/transaction.dart';
 
 class TransactionRepository {
-  List<Transaction> get generate => List.generate(20, (index) {
+  List<Transaction> get generate => List.generate(5, (index) {
         final str = index.toString() + DateTime.now().microsecond.toString();
         final subt = Random().nextInt(7);
 

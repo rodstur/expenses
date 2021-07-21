@@ -6,8 +6,9 @@ import '../helpers/currency.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> transactions;
+  final Currency currency = Currency();
 
-  const Chart(this.transactions);
+  Chart(this.transactions);
 
   List<Map<String, Object>> get groupedTransactions {
     return List.generate(7, (index) {
@@ -45,7 +46,7 @@ class Chart extends StatelessWidget {
             return Flexible(
               fit: FlexFit.tight,
               child: ChartBar(
-                value: Currency(e["value"]! as double).shortCurrency,
+                value: currency.shortCurrency(value: e["value"]! as double),
                 percentage: _weekSumTransactions == 0
                     ? 0
                     : (e["value"]! as double) / _weekSumTransactions,
