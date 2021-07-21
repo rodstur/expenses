@@ -1,6 +1,6 @@
-# expenses
+# Expenses
 
-A new Flutter project.
+A expense management app for training skills in flutter development
 
 ## Getting Started
 
